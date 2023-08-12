@@ -4,7 +4,6 @@ import githubReducer from "./GithubReducer";
 const GithubContext = createContext();
 
 const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
-
 export const GithubProvider = ({ children }) => {
   const initialState = {
     users: [],
@@ -21,11 +20,14 @@ export const GithubProvider = ({ children }) => {
         q: text,
       });
 
-      const res = await axios.get(`/search/users?${params}`, {
-        headers: {
-          Authorizarion: `token ${GITHUB_TOKEN}`,
-        },
-      });
+      const res = await axios.get(
+        `${process.env.REACT_APP_GITHUB_URL}/search/users?${params}`,
+        {
+          headers: {
+            Authorization: `token ${GITHUB_TOKEN}`,
+          },
+        }
+      );
       const { items } = res.data;
       dispatch({
         type: "GET_USERS",
@@ -37,11 +39,14 @@ export const GithubProvider = ({ children }) => {
   };
   const searchUser = async (login) => {
     try {
-      const res = await axios.get(`/users/${login}`, {
-        headers: {
-          Authorizarion: `token ${GITHUB_TOKEN}`,
-        },
-      });
+      const res = await axios.get(
+        `${process.env.REACT_APP_GITHUB_URL}/users/${login}`,
+        {
+          headers: {
+            Authorization: `token ${GITHUB_TOKEN}`,
+          },
+        }
+      );
       if (res.status === "404") {
         window.location = "/notfound";
       } else {
@@ -56,11 +61,14 @@ export const GithubProvider = ({ children }) => {
   };
   const userRepo = async (login) => {
     try {
-      const res = await axios.get(`/users/${login}/repos`, {
-        headers: {
-          Authorizarion: `token ${GITHUB_TOKEN}`,
-        },
-      });
+      const res = await axios.get(
+        `${process.env.REACT_APP_GITHUB_URL}/users/${login}/repos`,
+        {
+          headers: {
+            Authorization: `token ${GITHUB_TOKEN}`,
+          },
+        }
+      );
       if (res.status === "404") {
         window.location = "/notfound";
       } else {
