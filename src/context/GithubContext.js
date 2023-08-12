@@ -24,7 +24,7 @@ export const GithubProvider = ({ children }) => {
         `${process.env.REACT_APP_GITHUB_URL}/search/users?${params}`,
         {
           headers: {
-            Authorization: `token ${GITHUB_TOKEN}`,
+            // Authorization: `token ${GITHUB_TOKEN}`,
           },
         }
       );
