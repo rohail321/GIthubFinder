@@ -21,12 +21,7 @@ export const GithubProvider = ({ children }) => {
       });
 
       const res = await axios.get(
-        `${process.env.REACT_APP_GITHUB_URL}/search/users?${params}`,
-        {
-          headers: {
-            // Authorization: `token ${GITHUB_TOKEN}`,
-          },
-        }
+        `${process.env.REACT_APP_GITHUB_URL}/search/users?${params}`
       );
       const { items } = res.data;
       dispatch({
@@ -40,12 +35,7 @@ export const GithubProvider = ({ children }) => {
   const searchUser = async (login) => {
     try {
       const res = await axios.get(
-        `${process.env.REACT_APP_GITHUB_URL}/users/${login}`,
-        {
-          headers: {
-            Authorization: `token ${GITHUB_TOKEN}`,
-          },
-        }
+        `${process.env.REACT_APP_GITHUB_URL}/users/${login}`
       );
       if (res.status === "404") {
         window.location = "/notfound";
@@ -62,12 +52,7 @@ export const GithubProvider = ({ children }) => {
   const userRepo = async (login) => {
     try {
       const res = await axios.get(
-        `${process.env.REACT_APP_GITHUB_URL}/users/${login}/repos`,
-        {
-          headers: {
-            Authorization: `token ${GITHUB_TOKEN}`,
-          },
-        }
+        `${process.env.REACT_APP_GITHUB_URL}/users/${login}/repos`
       );
       if (res.status === "404") {
         window.location = "/notfound";
